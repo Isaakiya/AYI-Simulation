@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ayi-interview-simulator
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      # Optional integrations — set these in the Render dashboard when ready.
+      # - key: GEMINI_API_URL
+      #   sync: false
+      # - key: GEMINI_API_KEY
+      #   sync: false
+      # - key: BOTPRESS_API_URL
+      #   sync: false
+      # - key: N8N_WEBHOOK_URL
+      #   sync: false

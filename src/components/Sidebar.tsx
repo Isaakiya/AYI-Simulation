@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import type { Difficulty } from '../App';
 
 interface SidebarProps {
   currentView: 'home' | 'interview' | 'practice' | 'feedback' | 'universities' | 'jobs';
   onNavigate: (view: SidebarProps['currentView']) => void;
+  difficulty: Difficulty;
+  onDifficultyChange: (difficulty: Difficulty) => void;
 }
 
 const links: Array<{ key: SidebarProps['currentView']; label: string }> = [
@@ -14,8 +17,7 @@ const links: Array<{ key: SidebarProps['currentView']; label: string }> = [
   { key: 'jobs', label: 'IT Jobs' },
 ];
 
-export function Sidebar({ currentView, onNavigate }: SidebarProps) {
-  const [difficulty, setDifficulty] = useState('medium');
+export function Sidebar({ currentView, onNavigate, difficulty, onDifficultyChange }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -81,7 +83,7 @@ export function Sidebar({ currentView, onNavigate }: SidebarProps) {
           <select
             id="difficulty-select"
             value={difficulty}
-            onChange={(event) => setDifficulty(event.target.value)}
+            onChange={(event) => onDifficultyChange(event.target.value as Difficulty)}
             className="mt-3 w-full rounded-xl border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-slate-100 outline-none"
           >
             <option value="easy">Easy</option>

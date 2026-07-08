@@ -7,15 +7,22 @@ import { FeedbackPage } from './pages/FeedbackPage';
 import type { FeedbackResponse } from './services/api';
 
 export type View = 'home' | 'interview' | 'practice' | 'feedback' | 'universities' | 'jobs';
+export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export function App() {
   const [view, setView] = useState<View>('home');
   const [feedback, setFeedback] = useState<FeedbackResponse | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.16),_transparent_40%),linear-gradient(135deg,_#020617,_#111827)] p-4 text-slate-100 lg:p-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row">
-        <Sidebar currentView={view} onNavigate={setView} />
+        <Sidebar
+          currentView={view}
+          onNavigate={setView}
+          difficulty={difficulty}
+          onDifficultyChange={setDifficulty}
+        />
 
         <main className="flex-1">
           {view === 'home' && (
@@ -26,7 +33,7 @@ export function App() {
             />
           )}
 
-          {view === 'interview' && <InterviewPage onFeedbackReady={setFeedback} />}
+          {view === 'interview' && <InterviewPage onFeedbackReady={setFeedback} difficulty={difficulty} />}
 
           {view === 'practice' && <PracticePage />}
 
